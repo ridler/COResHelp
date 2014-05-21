@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="coloradoResidency">
+	<head>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="s.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<script src="moment.min.js"></script>
+		<script src="app.js"></script>
+	</head>
+
+	<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1 id="pageTitle">Colorado Tuition Classification</h1>
+			<div class="redBar"></div>
+			<div class="yellowBar"></div>
+			<p class="lead" id="pageSubtitle">how you can qualify as a resident</p>
+		</div>
+
+		<form name="reviewForm" ng-controller="FormController as form">
+
+              <!--  Review Form -->
+              <h4>About You</h4>
+              <fieldset class="form-group">
+              	<select ng-model="form.term" type="text" class="form-control" ng-options="term for term in terms" title="term">
+              		<option value>What semester do you want to qualify for?</option>
+              	</select>
+              </fieldset>
+              <fieldset class="form-group">
+              	<select ng-model="form.year" type="number" class="form-control" ng-options="year for year in years" title="year">
+              		<option value>In what year is the semester you want to qualify for?</option>
+              	</select>
+              </fieldset>
+              
+              <p ng-show="form.term && form.year">The start date of {{form.term}} {{form.year}} is {{ ("" + form.term + " " + form.year) | termStart | date }}</p>
+
+			  <input type="date" class="form-control" placeholder="mm/dd/yyyy" title="birthday"ng-model="form.bday"/>
+			  <p ng-show="form.term && form.year && form.bday">You will be {{form.bday | relAge}} by the first day of classes for {{form.term}} {{form.year}}.</p>
+
+              <fieldset class="form-group">
+                <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+              </fieldset>
+        </form>
+
+		<!-- <section class="tab">
+			<ul class="nav nav-pills">
+        		<li>
+            		<a href>Description</a></li>
+          		<li>
+            		<a href>Specs</a></li>
+          		<li>
+            		<a href>Reviews</a></li>
+        	</ul>
+        	<div>
+          		<h4>Description</h4>
+          		<blockquote></blockquote>
+        	</div>
+        	<div>
+          		<h4>Specs</h4>
+          			<blockquote>Shine: </blockquote>
+        	</div>
+        	<div>
+          		<h4>Reviews</h4>
+          		<blockquote></blockquote>
+        	</div>
+      </section> -->
+    </div>
+	</body>
+
+</html>

@@ -28,4 +28,8 @@ p#pageSubtitle {
 	background-color: #E9E9E9;
 }
 
+.alert { padding: 10px; }
+
 .cntbtn { margin-bottom: 15px; }
+
+.btn-selected { background-color: rgb(205, 237, 255); }

@@ -2,7 +2,7 @@
 
 	var app = angular.module('coloradoResidency', []);
 
-	var termStart, relAge, adult;
+	var termStart, relAge, adult, deriv, grad;
 
 	var termDate = function(term, year) {
 		switch(term) {
@@ -33,6 +33,14 @@
 	app.controller('FormController', [ '$scope', function($scope) {
 		$scope.terms = ['Fall', 'Spring', 'Summer'];
 		$scope.years = [2014, 2015, 2016];
+		$scope.setAdult = function() {
+			$scope.adult = adult;
+			$showOtherForm = true;
+			console.log('adult: ' + $scope.adult);
+		}
+		$scope.setMarried = function(ans) {
+			return ans ? married = true : married = false;
+		};
 	}]);
 
 	app.filter('age', function() {
@@ -49,34 +57,17 @@
 	app.filter('relAge', function() {
 		return function(input) {
 			relAge = moment(termStart).diff(moment(input), 'years');
-			if(relAge < 22) { adult = false; }
+			if(relAge < 23) { adult = false; } else { adult = true; }
 			return relAge;
 		};
 	});
 
-	// app.directive('inputBday', function() {
-	// 	return {
-	// 		restrict: 'E',
-	// 		template: '<input type="date" class="form-control" placeholder="mm/dd/yyyy" title="birthday"/>\n<span ng-show="form.bday">Your birthday is {{form.bday | date}}</span>',
-	// 		replace: false,
-	// 		controller: 'FormController',
-	// 		require: ['^form', 'ngModel'],
-	// 		scope: {},
-	// 		link: function(scope, element, attrs, ctrl) {
-	// 			scope = ctrl[0];
-	// 			console.log(scope);
-	// 		}
-	// 	};
-	// });
-	// app.controller('AnnouncementsController', [ '$scope', '$http', function($scope, $http) {
-	// 	$http.get('/announcements.json').success(function(data) {
-	// 		for(var a = 0; a < data.length; a++) { 
-	// 			if(data[a].type === 'meeting') { data[a].cssClass = "list-group-item-success"; }
-	// 			else if(data[a].type === 'event') { data[a].cssClass = "list-group-item-warning"; }
-	// 			else{ data[a].cssClass = "list-group-item-info"; }
-	// 		}
-	// 		$scope.announcements = data;
-	// 	});
-	// } ]);
+	$(document).ready(function() {
+		$('.cntbtn').click(function() {
+			$('#mainform').hide();
+			if(adult === false) { $('#nonadultform').fadeIn('slow'); }
+			else if(adult === true) { $('#adultres').fadeIn('slow'); }
+		});
+	});
 
 })();

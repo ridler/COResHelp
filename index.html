@@ -9,6 +9,7 @@
 		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href="s.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="moment.min.js"></script>
 		<script src="app.js"></script>
 	</head>
@@ -16,7 +17,7 @@
 	<body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1 id="pageTitle">Colorado Tuition Classification</h1>
+			<h3 id="pageTitle">Colorado Tuition Classification</h3>
 			<div class="redBar"></div>
 			<div class="yellowBar"></div>
 			<p class="lead" id="pageSubtitle">how you can qualify as a resident</p>
@@ -25,27 +26,67 @@
 		<form name="reviewForm" ng-controller="FormController as form">
 
               <!--  Review Form -->
-              <h4>About You</h4>
-              <fieldset class="form-group">
-              	<select ng-model="form.term" type="text" class="form-control" ng-options="term for term in terms" title="term">
-              		<option value>What semester do you want to qualify for?</option>
-              	</select>
-              </fieldset>
-              <fieldset class="form-group">
-              	<select ng-model="form.year" type="number" class="form-control" ng-options="year for year in years" title="year">
-              		<option value>In what year is the semester you want to qualify for?</option>
-              	</select>
-              </fieldset>
-              
-              <p ng-show="form.term && form.year">The start date of {{form.term}} {{form.year}} is {{ ("" + form.term + " " + form.year) | termStart | date }}</p>
+              <div id="mainform">
+	              <h3>About You</h3>
+	              <fieldset class="form-group">
+	              	<select ng-model="form.term" type="text" class="form-control" ng-options="term for term in terms" title="term">
+	              		<option value>What semester do you want to qualify for?</option>
+	              	</select>
+	              </fieldset>
+	              
+	              <fieldset class="form-group">
+	              	<select ng-model="form.year" type="number" class="form-control" ng-options="year for year in years" title="year">
+	              		<option value>In what year is the semester you want to qualify for?</option>
+	              	</select>
+	              </fieldset>
+	              
+	              <div ng-show="form.term && form.year" class="alert alert-info">
+	              	<p>The start date of {{form.term}} {{form.year}} is {{ ("" + form.term + " " + form.year) | termStart | date }}</p>
+	              </div>
 
-			  <input type="date" class="form-control" placeholder="mm/dd/yyyy" title="birthday"ng-model="form.bday"/>
-			  <p ng-show="form.term && form.year && form.bday">You will be {{form.bday | relAge}} by the first day of classes for {{form.term}} {{form.year}}.</p>
+	              <fieldset class="form-group">
+				  	<input type="date" class="form-control" placeholder="mm/dd/yyyy" title="birthday"ng-model="form.bday"/>
+				  </fieldset>
+
+				  <div ng-show="form.term && form.year && form.bday" class="alert alert-danger">
+				  	<p>You will be {{form.bday | relAge}} by the first day of classes for {{form.term}} {{form.year}}.</p>
+				  </div>
+
+				  <button ng-click="setAdult()" type="button" class="btn btn-info cntbtn">Continue</button>
+			  </div>
+
+			  <div id="nonadultform" style="display:none">
+				  <p>Are you married?</p>
+				  <fieldset class="form-group">
+					<div class="btn-group">
+					  <button ng-click="setMarried(true)" type="button" class="btn btn-default">Married</button>
+					  <button ng-click="setMarried(false)" type="button" class="btn btn-default">Unmarried</button>
+					</div>
+				  </fieldset>
+				  <p>Are you a graduate student?</p>
+				  <fieldset class="form-group">
+					<div class="btn-group">
+					  <button ng-click="setMarried(true)" type="button" class="btn btn-default">Grad</button>
+					  <button ng-click="setMarried(false)" type="button" class="btn btn-default">Undergrad</button>
+					</div>
+				  </fieldset>
+				  <p>Will a parent live in Colorado with you?</p>
+				  <fieldset class="form-group">
+					<div class="btn-group">
+					  <button ng-click="setMarried(true)" type="button" class="btn btn-default">Yes</button>
+					  <button ng-click="setMarried(false)" type="button" class="btn btn-default">No</button>
+					</div>
+				  </fieldset>
+			  </div>
 
 <!--               <fieldset class="form-group">
                 <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
               </fieldset> -->
         </form>
+
+        <div id="adultres" style="display:none">
+        	<h2>YOU ARE AN ADULT</h2>
+        </div>
 
 		<!-- <section class="tab">
 			<ul class="nav nav-pills">

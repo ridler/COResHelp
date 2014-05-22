@@ -12,7 +12,7 @@
 	display: inline-block;
 }
 
-h1#pageTitle {
+h3#pageTitle {
 	color: #1C207A;
 	font-family: serif;
 }
@@ -20,9 +20,12 @@ h1#pageTitle {
 p#pageSubtitle {
 	color: #1C207A;
 	padding: 5px;
+	font-family: serif;
 }
 
 .jumbotron {
 	padding: 10px;
 	background-color: #E9E9E9;
 }
+
+.cntbtn { margin-bottom: 15px; }

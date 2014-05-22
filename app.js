@@ -77,7 +77,8 @@
 		$('.btn-default').click(function() {
 			$(this).addClass('btn-selected');
 		});
-		$('.adultbtn').click(function() { adult = true; console.log(adult); } );
+		$('.adultbtn').click(function() { adult = true; } );
+		$('.nonadultbtn').click(function() { adult = false; } );
 		$('#nonadultcnt').click(function() {
 			if(deriv == null) { $(this).before(incompleteAlert); return; }
 			else {
@@ -86,7 +87,7 @@
 				else if(adult === true) { $('#adultres').fadeIn('slow'); }
 				else { $('#emancres').fadeIn('slow'); console.log(adult); }
 			}
-		})
+		});
 	});
 
 })();

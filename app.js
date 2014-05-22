@@ -3,6 +3,7 @@
 	var app = angular.module('coloradoResidency', []);
 
 	var termStart, relAge, adult, deriv, grad;
+	var incompleteAlert = '<div class="alert alert-danger"><p>All fields are required</p></div>';
 
 	var termDate = function(term, year) {
 		switch(term) {
@@ -34,12 +35,12 @@
 		$scope.terms = ['Fall', 'Spring', 'Summer'];
 		$scope.years = [2014, 2015, 2016];
 		$scope.setAdult = function() {
+			if(relAge < 23) { adult = false; } else { adult = true; }
 			$scope.adult = adult;
-			$showOtherForm = true;
 			console.log('adult: ' + $scope.adult);
 		}
-		$scope.setMarried = function(ans) {
-			return ans ? married = true : married = false;
+		$scope.setDeriv = function(ans) {
+			return ans ? deriv = true : deriv = false;
 		};
 	}]);
 
@@ -57,17 +58,35 @@
 	app.filter('relAge', function() {
 		return function(input) {
 			relAge = moment(termStart).diff(moment(input), 'years');
-			if(relAge < 23) { adult = false; } else { adult = true; }
 			return relAge;
 		};
 	});
 
 	$(document).ready(function() {
-		$('.cntbtn').click(function() {
-			$('#mainform').hide();
-			if(adult === false) { $('#nonadultform').fadeIn('slow'); }
-			else if(adult === true) { $('#adultres').fadeIn('slow'); }
+		$('#maincnt').click(function() {
+			if(relAge) {
+				$('#mainform').hide();
+				if(adult === false) { $('#nonadultform').fadeIn('slow'); }
+				else if(adult === true) { $('#adultres').fadeIn('slow'); }
+			} else {
+				$(this).slideDown('slow', function() {
+					$(this).before(incompleteAlert);
+				});
+			}
 		});
+		$('.btn-default').click(function() {
+			$(this).addClass('btn-selected');
+		});
+		$('.adultbtn').click(function() { adult = true; console.log(adult); } );
+		$('#nonadultcnt').click(function() {
+			if(deriv == null) { $(this).before(incompleteAlert); return; }
+			else {
+				$('#nonadultform').hide();
+				if(deriv === true) { $('#derivres').fadeIn('slow'); }
+				else if(adult === true) { $('#adultres').fadeIn('slow'); }
+				else { $('#emancres').fadeIn('slow'); console.log(adult); }
+			}
+		})
 	});
 
 })();

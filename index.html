@@ -52,31 +52,33 @@
 				  	<p>You will be {{form.bday | relAge}} by the first day of classes for {{form.term}} {{form.year}}.</p>
 				  </div>
 
-				  <button ng-click="setAdult()" type="button" class="btn btn-info cntbtn">Continue</button>
+				  <button ng-click="setAdult()" id="maincnt" type="button" class="btn btn-info cntbtn">Continue</button>
 			  </div>
 
 			  <div id="nonadultform" style="display:none">
 				  <p>Are you married?</p>
 				  <fieldset class="form-group">
 					<div class="btn-group">
-					  <button ng-click="setMarried(true)" type="button" class="btn btn-default">Married</button>
-					  <button ng-click="setMarried(false)" type="button" class="btn btn-default">Unmarried</button>
+					  <button type="button" class="btn btn-default adultbtn">Married</button>
+					  <button type="button" class="btn btn-default">Unmarried</button>
 					</div>
 				  </fieldset>
 				  <p>Are you a graduate student?</p>
 				  <fieldset class="form-group">
 					<div class="btn-group">
-					  <button ng-click="setMarried(true)" type="button" class="btn btn-default">Grad</button>
-					  <button ng-click="setMarried(false)" type="button" class="btn btn-default">Undergrad</button>
+					  <button type="button" class="btn btn-default adultbtn">Grad</button>
+					  <button type="button" class="btn btn-default">Undergrad</button>
 					</div>
 				  </fieldset>
 				  <p>Will a parent live in Colorado with you?</p>
 				  <fieldset class="form-group">
 					<div class="btn-group">
-					  <button ng-click="setMarried(true)" type="button" class="btn btn-default">Yes</button>
-					  <button ng-click="setMarried(false)" type="button" class="btn btn-default">No</button>
+					  <button ng-click="setDeriv(true)" type="button" class="btn btn-default">Yes</button>
+					  <button ng-click="setDeriv(false)" type="button" class="btn btn-default">No</button>
 					</div>
 				  </fieldset>
+
+				  <button type="button" id="nonadultcnt" class="btn btn-info cntbtn">Continue</button>
 			  </div>
 
 <!--               <fieldset class="form-group">
@@ -86,6 +88,14 @@
 
         <div id="adultres" style="display:none">
         	<h2>YOU ARE AN ADULT</h2>
+        </div>
+
+        <div id="derivres" style="display:none">
+        	<h2>YOU ARE A DERIVATIVE</h2>
+        </div>
+
+        <div id="emancres" style="display:none">
+        	<h2>YOU ARE AN EMANCIPATED MINOR</h2>
         </div>
 
 		<!-- <section class="tab">

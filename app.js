@@ -63,6 +63,7 @@
 	});
 
 	$(document).ready(function() {
+		
 		$('#maincnt').click(function() {
 			if(relAge) {
 				$('#mainform').hide();
@@ -74,11 +75,16 @@
 				});
 			}
 		});
+		
 		$('.btn-default').click(function() {
 			$(this).addClass('btn-selected');
 		});
+		
+		$('.reload').click(function() { location.reload(); } );
+
 		$('.adultbtn').click(function() { adult = true; } );
 		$('.nonadultbtn').click(function() { adult = false; } );
+
 		$('#nonadultcnt').click(function() {
 			if(deriv == null) { $(this).before(incompleteAlert); return; }
 			else {

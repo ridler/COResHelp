@@ -2,7 +2,7 @@
 
 	var app = angular.module('coloradoResidency', []);
 
-	var termStart, relAge, adult, deriv, grad;
+	var termStart, relAge, adult, deriv, grad, married;
 	var incompleteAlert = '<div class="alert alert-danger"><p>All fields are required</p></div>';
 
 	var termDate = function(term, year) {
@@ -88,13 +88,17 @@
 		
 		$('.reload').click(function() { location.reload(); } );
 
-		$('.adultbtn').click(function() { adult = true; } );
-		$('.nonadultbtn').click(function() { adult = false; } );
+		$('#grad').click(function() { grad = true; } );
+		$('#undergrad').click(function() { grad = false; } );
+		$('#married').click(function() { married = true; } );
+		$('#unmarried').click(function() { married = false; } );
 
 		$('#nonadultcnt').click(function() {
 			if(deriv == null) { $(this).before(incompleteAlert); return; }
 			else {
 				$('#nonadultform').hide();
+				if(married || grad) { adult = true; }
+				else { adult = false; }
 				if(deriv === true) { $('#derivres').fadeIn('slow'); }
 				else if(adult === true) { $('#adultres').fadeIn('slow'); }
 				else { $('#emancres').fadeIn('slow'); console.log(adult); }

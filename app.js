@@ -63,10 +63,15 @@
 	});
 
 	$(document).ready(function() {
+
+		$('#landing').click(function() {
+			$(this).hide();
+			$('.startpage').hide();
+			$('#mainform').fadeIn('slow');
+		});
 		
 		$('#maincnt').click(function() {
 			if(relAge) {
-				$('#mainform').hide();
 				if(adult === false) { $('#nonadultform').fadeIn('slow'); }
 				else if(adult === true) { $('#adultres').fadeIn('slow'); }
 			} else {

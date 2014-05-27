@@ -1,32 +1,17 @@
-.redBar {
-	width: 30%;
-	height: 10px;
-	background-color: rgb(214, 0, 0);
-	display: inline-block;
+body { width:100%; height:100%; }
+
+html { min-height:100%; position:relative; }
+
+img#landing { width: 100%; }
+
+.startpage {
+	background-color:#002868;
+	width:100%;
+	height:100%;
+	position:absolute;
 }
 
-.yellowBar {
-	width: 63%;
-	height: 10px;
-	background-color: rgb(240, 194, 96);
-	display: inline-block;
-}
-
-h3#pageTitle {
-	color: #1C207A;
-	font-family: serif;
-}
-
-p#pageSubtitle {
-	color: #1C207A;
-	padding: 5px;
-	font-family: serif;
-}
-
-.jumbotron {
-	padding: 10px;
-	background-color: #E9E9E9;
-}
+div#appmain { background-color: white; }
 
 .alert { padding: 10px; }
 

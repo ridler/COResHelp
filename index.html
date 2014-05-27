@@ -15,18 +15,15 @@
 	</head>
 
 	<body>
-	<div class="container">
-		<div class="jumbotron">
-			<h3 id="pageTitle">Colorado Tuition Classification</h3>
-			<div class="redBar"></div>
-			<div class="yellowBar"></div>
-			<p class="lead" id="pageSubtitle">how you can qualify as a resident</p>
-		</div>
+
+	<div class="startpage"><img src="COResHelpLanding.png" id="landing"></div>
+
+	<div class="container" id="appmain">
 
 		<form name="reviewForm" ng-controller="FormController as form">
 
               <!--  Review Form -->
-              <div id="mainform">
+              <div id="mainform" style="display:none">
 	              <h3>About You</h3>
 	              <fieldset class="form-group">
 	              	<select ng-model="form.term" type="text" class="form-control" ng-options="term for term in terms" title="term">

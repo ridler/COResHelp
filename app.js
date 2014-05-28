@@ -61,6 +61,8 @@
 
 	$(document).ready(function() {
 
+		$('#landing').css('margin-top', '' + ($(window).height()/2 - $('#landing').height()/2) + 'px');
+
 		$('#landing').click(function() {
 			$(this).hide();
 			$('.startpage').hide();

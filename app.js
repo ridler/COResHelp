@@ -39,9 +39,6 @@
 			$scope.adult = adult;
 			console.log('adult: ' + $scope.adult);
 		}
-		$scope.setDeriv = function(ans) {
-			return ans ? deriv = true : deriv = false;
-		};
 	}]);
 
 	app.filter('age', function() {
@@ -82,16 +79,38 @@
 			}
 		});
 		
-		$('.btn-default').click(function() {
-			$(this).addClass('btn-selected');
-		});
-		
 		$('.reload').click(function() { location.reload(); } );
 
-		$('#grad').click(function() { grad = true; } );
-		$('#undergrad').click(function() { grad = false; } );
-		$('#married').click(function() { married = true; } );
-		$('#unmarried').click(function() { married = false; } );
+		$('#grad').click(function() {
+			$(this).addClass('btn-selected');
+			$('#undergrad').removeClass('btn-selected');
+			grad = true;
+		});
+		$('#undergrad').click(function() {
+			$(this).addClass('btn-selected');
+			$('#grad').removeClass('btn-selected');
+			grad = false;
+		});
+		$('#married').click(function() {
+			$(this).addClass('btn-selected');
+			$('#unmarried').removeClass('btn-selected');
+			married = true;
+		});
+		$('#unmarried').click(function() {
+			$(this).addClass('btn-selected');
+			$('#married').removeClass('btn-selected');
+			married = false;
+		});
+		$('#deriv').click(function() {
+			$(this).addClass('btn-selected');
+			$('#nonderiv').removeClass('btn-selected');
+			deriv = true;
+		});
+		$('#nonderiv').click(function() {
+			$(this).addClass('btn-selected');
+			$('#deriv').removeClass('btn-selected');
+			deriv = false;
+		});
 
 		$('#nonadultcnt').click(function() {
 			if(deriv == null) { $(this).before(incompleteAlert); return; }

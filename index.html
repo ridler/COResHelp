@@ -25,15 +25,16 @@
               <!--  Review Form -->
               <div id="mainform" style="display:none">
 	              <h3>About You</h3>
+	              <p>What semester do you want to qualify for?</p>
 	              <fieldset class="form-group">
 	              	<select ng-model="form.term" type="text" class="form-control" ng-options="term for term in terms" title="term">
-	              		<option value>What semester do you want to qualify for?</option>
+	              		<option value>Semester</option>
 	              	</select>
 	              </fieldset>
-	              
+	              <p>In what year is the semester you want to qualify for?</p>
 	              <fieldset class="form-group">
 	              	<select ng-model="form.year" type="number" class="form-control" ng-options="year for year in years" title="year">
-	              		<option value>In what year is the semester you want to qualify for?</option>
+	              		<option value>Year</option>
 	              	</select>
 	              </fieldset>
 	              
@@ -41,6 +42,7 @@
 	              	<p>The start date of {{form.term}} {{form.year}} is {{ ("" + form.term + " " + form.year) | termStart | date }}</p>
 	              </div>
 
+	              <p>Enter your date of birth in mm/dd/yyyy format:</p>
 	              <fieldset class="form-group">
 				  	<input type="date" class="form-control" placeholder="mm/dd/yyyy" title="birthday"ng-model="form.bday"/>
 				  </fieldset>
@@ -53,6 +55,7 @@
 			  </div>
 
 			  <div id="nonadultform" style="display:none">
+			  	<h3>About You</h3>
 				  <p>Are you married?</p>
 				  <fieldset class="form-group">
 					<div class="btn-group">
@@ -70,8 +73,8 @@
 				  <p>Will a parent live in Colorado with you?</p>
 				  <fieldset class="form-group">
 					<div class="btn-group">
-					  <button ng-click="setDeriv(true)" type="button" class="btn btn-default">Yes</button>
-					  <button ng-click="setDeriv(false)" type="button" class="btn btn-default">No</button>
+					  <button type="button" class="btn btn-default" id="deriv">Yes</button>
+					  <button type="button" class="btn btn-default" id="nonderiv">No</button>
 					</div>
 				  </fieldset>
 

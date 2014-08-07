@@ -6,9 +6,9 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 		<link href="s.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="moment.min.js"></script>
 		<script src="app.js"></script>
@@ -16,43 +16,71 @@
 
 	<body>
 
-	<div class="startpage"><img src="COResHelpLanding.png" id="landing"></div>
+		<div ng-controller="FormController">
+			<div class="startpage" ng-show="!(showMainForm || mainCntClicked)"><img src="COResHelpLanding.png" id="landing" ng-click="showMainForm=true"></div>
 
-	<div class="container" id="appmain">
+			<form role="form">
+				
+				<div id="mainform" class="container" ng-show="showMainForm">
+					<h3>About You</h3>
+					<div class="form-group form-group-lg">
+						<label for="semester">What semester do you want to qualify for?</label>
+						<select id="semester" type="text" ng-model="term" class="form-control input-lg" ng-options="term for term in terms">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="form-group form-group-lg">
+						<label for="semester">In what year is the semester you want to qualify for?</label>
+						<select id="year" type="number" step="1" ng-model="year" class="form-control input-lg" ng-options="year for year in years" ng-change="setTermStart()">
+							<option value=""></option>
+						</select>
+					</div>
+					<div ng-show="term && year" class="alert alert-info">
+		              	<p>The start date of {{term}} {{year}} is {{termStart | date }}</p>
+		            </div>
+					<div class="form-group form-group-lg">
+						<label for="bday">Enter your date of birth (mm/dd/yyyy): </label>
+						<input id="bday" type="date" ng-model="bday" ng-change=
+						"checkDates()" class="form-control input-lg">
+					</div>
+					<div ng-show="tryAge" class="alert alert-info">
+					  	<p>You will be {{relAge}} by the first day of classes for {{term}} {{year}}.</p>
+					</div>
+					<div ng-show="mainCntClicked && !(term && year && bday)" class="alert alert-danger">
+						<p>All fields are required</p>
+					</div>
+					<button class="btn btn-default btn-lg btn-centerline" ng-click="setAdult()">Continue</button>
+				</div>
 
-		<form name="reviewForm" ng-controller="FormController as form">
+				<div class="container" ng-show="showNonAdultForm">
+					<h3>More About You</h3>
+					<div class="form-group form-group-lg">
+						<label for="married">Are you married?</label>
+						<select id="married" type="text" ng-model="married" class="form-control input-lg" ng-options="ans for ans in yesNo">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="form-group form-group-lg">
+						<label for="grad">Are you married?</label>
+						<select id="grad" type="text" ng-model="grad" class="form-control input-lg" ng-options="ans for ans in yesNo">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="form-group form-group-lg">
+						<label for="marriageDate">When was your date of marriage?</label>
+						<input id="marriageDate" type="date" ng-show="married == 'Yes'" ng-model="marriageDate" class="form-control input-lg">
+					</div>
+					<div class="form-group form-group-lg">
+						<label for="parent">Will a parent live in Colorado with you?</label>
+						<select id="parent" type="text" ng-model="parent" class="form-control input-lg" ng-options="ans for ans in yesNo">
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
 
-              <!--  Review Form -->
-              <div id="mainform" style="display:none">
-	              <h3>About You</h3>
-	              <p>What semester do you want to qualify for?</p>
-	              <fieldset class="form-group">
-	              	<select ng-model="form.term" type="text" class="form-control" ng-options="term for term in terms" title="term">
-	              		<option value>Semester</option>
-	              	</select>
-	              </fieldset>
-	              <p>In what year is the semester you want to qualify for?</p>
-	              <fieldset class="form-group">
-	              	<select ng-model="form.year" type="number" class="form-control" ng-options="year for year in years" title="year">
-	              		<option value>Year</option>
-	              	</select>
-	              </fieldset>
-	              
-	              <div ng-show="form.term && form.year" class="alert alert-info">
-	              	<p>The start date of {{form.term}} {{form.year}} is {{ ("" + form.term + " " + form.year) | termStart | date }}</p>
-	              </div>
+			</form>
+		</div>
 
-	              <p>Enter your date of birth in mm/dd/yyyy format:</p>
-	              <fieldset class="form-group">
-				  	<input type="date" class="form-control" placeholder="mm/dd/yyyy" title="birthday"ng-model="form.bday"/>
-				  </fieldset>
-
-				  <div ng-show="form.term && form.year && form.bday" class="alert alert-danger">
-				  	<p>You will be {{form.bday | relAge}} by the first day of classes for {{form.term}} {{form.year}}.</p>
-				  </div>
-
-				  <button ng-click="setAdult()" id="maincnt" type="button" class="btn btn-info cntbtn">Continue</button>
-			  </div>
 
 			  <div id="nonadultform" style="display:none">
 			  	<h3>About You</h3>
